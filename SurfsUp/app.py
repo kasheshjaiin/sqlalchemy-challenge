@@ -1,5 +1,6 @@
 # Import the dependencies.
 import datetime as dt
+import numpy as np
 
 import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
@@ -64,10 +65,14 @@ def precipitation():
 @app.route("/api/v1.0/stations")
 def stations():
     """Return a list of stations."""
+
+    # Query all stations
     station_results = session.query(station.station).all()
-    stations_list = [station[0] for station in station_results]
     
-    return jsonify(stations_list)
+    # Convert list of tuples into normal list
+    stations = list(np.ravel(station_results))
+
+    return jsonify(stations)
 
 @app.route("/api/v1.0/tobs")
 def tobs():
