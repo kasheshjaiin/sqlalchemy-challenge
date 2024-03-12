@@ -111,9 +111,7 @@ def tobs():
     # Convert the query results to a list of temperatures
     temperatures = [temp[0] for temp in temperature_data]
 
-    temp_list = list(np.ravel(temperatures))
-    
-    return jsonify(temp_list)
+    return jsonify(temperatures)
 
 @app.route("/api/v1.0/<start>")
 def start_date(start):
