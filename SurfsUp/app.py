@@ -98,7 +98,9 @@ def tobs():
     most_active_station_id = most_active_station[0]
 
     # Starting from the most recent data point in the database. 
-    most_recent_date = dt.date(2017, 8, 23)
+    most_recent_date = session.query(measurement.date).order_by(measurement.date.desc()).first()
+    most_recent_date = dt.datetime.strptime(most_recent_date[0], '%Y-%m-%d').date()
+
     # Calculate the date one year from the last date in data set.
     one_year_ago = most_recent_date - dt.timedelta(days=365)
     
